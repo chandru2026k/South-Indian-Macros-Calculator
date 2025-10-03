@@ -12,7 +12,6 @@ function calcBMR({gender, weight, height, age}){
   }
 }
 
-// Macros calc
 function calcMacros({weight, tdee, goal}){
   let protPerKg = 1.8;
   if(goal === 'cut') protPerKg = 2.0;
@@ -36,13 +35,15 @@ function adjustForGoal(tdee, goal){
   return round(tdee, 0);
 }
 
-// DOM elements
 const els = {
   calcBtn: document.getElementById('calcBtn'),
   resetBtn: document.getElementById('resetBtn'),
   resultsPlaceholder: document.getElementById('resultsPlaceholder'),
   mealPlan: document.getElementById('mealPlan'),
   workoutPlan: document.getElementById('workoutPlan'),
+  todoInput: document.getElementById('todoInput'),
+  addTodo: document.getElementById('addTodo'),
+  todoList: document.getElementById('todoList')
 };
 
 function readInputs(){
@@ -64,21 +65,17 @@ function renderResults(data){
     <div class="kpi">
       <div>
         <div class="value">${tdeeAdjusted} kcal</div>
-        <div class="label">Daily calories (goal adjusted)</div>
+        <div class="label">Daily calories (adjusted)</div>
       </div>
     </div>
-    <div style="margin-top:10px;">
-      <div class="small">BMR: ${round(bmr)} kcal · TDEE: ${round(tdee)} kcal</div>
-      <div style="margin-top:8px">
-        <div style="display:flex; justify-content:space-between"><span class="small">Protein</span><strong>${macros.protein_g} g</strong></div>
-        <div class="bar"><i class="protein" style="width:${Math.min(100, Math.round((macros.protein_g*4 / tdeeAdjusted)*100))}%"></i></div>
-
-        <div style="display:flex; justify-content:space-between; margin-top:8px"><span class="small">Carbs</span><strong>${macros.carb_g} g</strong></div>
-        <div class="bar"><i class="carb" style="width:${Math.min(100, Math.round((macros.carb_kcal / tdeeAdjusted)*100))}%"></i></div>
-
-        <div style="display:flex; justify-content:space-between; margin-top:8px"><span class="small">Fats</span><strong>${macros.fat_g} g</strong></div>
-        <div class="bar"><i class="fat" style="width:${Math.min(100, Math.round((macros.fat_kcal / tdeeAdjusted)*100))}%"></i></div>
-      </div>
+    <div class="small">BMR: ${round(bmr)} kcal · TDEE: ${round(tdee)} kcal</div>
+    <div style="margin-top:8px">
+      <div>Protein: <strong>${macros.protein_g} g</strong></div>
+      <div class="bar"><i class="protein" style="width:${(macros.protein_g*4/tdeeAdjusted)*100}%"></i></div>
+      <div>Carbs: <strong>${macros.carb_g} g</strong></div>
+      <div class="bar"><i class="carb" style="width:${(macros.carb_kcal/tdeeAdjusted)*100}%"></i></div>
+      <div>Fats: <strong>${macros.fat_g} g</strong></div>
+      <div class="bar"><i class="fat" style="width:${(macros.fat_kcal/tdeeAdjusted)*100}%"></i></div>
     </div>
   `;
 }
@@ -87,11 +84,11 @@ function suggestMealPlan(inputs){
   const p = inputs.foodpref;
   const lines = [];
   lines.push('<ul>');
-  lines.push('<li><strong>Breakfast:</strong> 2 Idlis + Sambar + 1 cup curd</li>');
-  if(p !== 'veg') lines.push('<li><strong>Snack:</strong> 1 boiled egg or banana</li>');
-  lines.push('<li><strong>Lunch:</strong> 1 cup rice + sambar + veg curry or chicken curry</li>');
-  lines.push('<li><strong>Evening:</strong> Sundal or roasted chana</li>');
-  lines.push('<li><strong>Dinner:</strong> 2 dosas or rice + veg + salad/fish</li>');
+  lines.push('<li><strong>Breakfast:</strong> 3 Idlis + Sambar + 1 cup curd</li>');
+  if(p !== 'veg') lines.push('<li><strong>Snack:</strong> 2 boiled eggs / banana</li>');
+  lines.push('<li><strong>Lunch:</strong> 1 cup rice + sambar + veg curry' + (p==='nonveg' ? ' + chicken/fish' : '') + '</li>');
+  lines.push('<li><strong>Evening:</strong> Sundal / roasted chana</li>');
+  lines.push('<li><strong>Dinner:</strong> 2 dosas or chapati + veg curry' + (p==='nonveg' ? ' + egg/fish' : '') + '</li>');
   lines.push('</ul>');
   els.mealPlan.innerHTML = lines.join('\n');
 }
@@ -100,14 +97,14 @@ function suggestWorkout(inputs){
   const g = inputs.goal;
   let html = '';
   if(g === 'cut'){
-    html = `<strong>3-day split (Cut)</strong>
-      <ol><li>Day1: Strength + 20–30 min cardio</li><li>Day2: HIIT 30 min</li><li>Day3: Strength + core</li></ol>`;
+    html = `<strong>3-day Cut Plan</strong>
+      <ol><li>Day1: Full body + 20 min cardio</li><li>Day2: HIIT 25 min</li><li>Day3: Strength + core</li></ol>`;
   } else if(g === 'bulk'){
-    html = `<strong>4-day split (Bulk)</strong>
+    html = `<strong>4-day Bulk Plan</strong>
       <ol><li>Day1: Push</li><li>Day2: Pull</li><li>Day3: Legs</li><li>Day4: Full-body</li></ol>`;
   } else {
-    html = `<strong>3-day balanced</strong>
-      <ol><li>Day1: Upper</li><li>Day2: Cardio + core</li><li>Day3: Lower</li></ol>`;
+    html = `<strong>3-day Maintenance Plan</strong>
+      <ol><li>Day1: Upper body</li><li>Day2: Cardio + core</li><li>Day3: Lower body</li></ol>`;
   }
   els.workoutPlan.innerHTML = html;
 }
@@ -124,6 +121,7 @@ els.calcBtn.addEventListener('click', ()=>{
   suggestWorkout(inputs);
 });
 
+// Reset
 els.resetBtn.addEventListener('click', ()=>{
   document.getElementById('name').value = '';
   document.getElementById('age').value = 22;
@@ -134,6 +132,19 @@ els.resetBtn.addEventListener('click', ()=>{
   document.getElementById('goal').value = 'maintain';
   document.getElementById('foodpref').value = 'nonveg';
   els.resultsPlaceholder.innerHTML = '<p class="small">No calculation yet — click <strong>Calculate</strong>.</p>';
-  els.mealPlan.innerHTML = '<p class="small">After calculation, sample meals will appear here.</p>';
-  els.workoutPlan.innerHTML = '<p class="small">After calculation, a 3–4 day starter plan will be suggested.</p>';
+  els.mealPlan.innerHTML = '<p class="small">After calculation, meals will appear here.</p>';
+  els.workoutPlan.innerHTML = '<p class="small">After calculation, workouts will appear here.</p>';
+  els.todoList.innerHTML = '';
+});
+
+// To-do list
+els.addTodo.addEventListener('click', ()=>{
+  const task = els.todoInput.value.trim();
+  if(task){
+    const li = document.createElement('li');
+    li.textContent = task;
+    li.addEventListener('click', ()=> li.classList.toggle('done'));
+    els.todoList.appendChild(li);
+    els.todoInput.value = '';
+  }
 });

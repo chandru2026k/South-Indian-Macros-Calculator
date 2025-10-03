@@ -1,14 +1,14 @@
 :root{
   --bg1: #ffecd2;
   --bg2: #fcb69f;
-  --card: rgba(255,255,255,0.85);
+  --card: rgba(255,255,255,0.9);
   --accent: #ff6b6b;
   --muted:#5b6b6b;
 }
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family: Inter, system-ui, -apple-system, Roboto, 'Segoe UI', Arial;
+  font-family: Inter, system-ui, Roboto, Arial;
   background: linear-gradient(135deg,var(--bg1),var(--bg2));
   min-height:100vh;
   display:flex;
@@ -28,8 +28,8 @@ body{
 .left{ padding:24px; }
 .right{ padding:24px; }
 
-h1{margin:0 0 8px; font-size:20px}
-p.lead{margin:0 0 18px; color:var(--muted); font-size:13px}
+h1{margin:0 0 8px; font-size:22px}
+p.lead{margin:0 0 18px; color:var(--muted); font-size:14px}
 label{display:block; font-size:13px; margin-bottom:6px}
 input, select{
   width:100%;
@@ -53,21 +53,43 @@ button.ghost{
 }
 .card{
   background:white; border-radius:12px;
-  padding:18px; box-shadow:0 6px 20px rgba(13,13,13,0.04);
+  padding:18px; box-shadow:0 6px 20px rgba(13,13,13,0.06);
   margin-bottom:12px
 }
-.kpi{display:flex; gap:12px; align-items:baseline}
 .kpi .value{font-size:20px; font-weight:700}
 .kpi .label{color:var(--muted); font-size:12px}
-.bar{flex:1; height:14px; border-radius:8px;
-  background:linear-gradient(90deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02));
-  position:relative; overflow:hidden; margin-top:6px;
+.bar{height:14px; border-radius:8px;
+  background:#eee; margin:6px 0; position:relative;
 }
 .bar > i{position:absolute; left:0; top:0; bottom:0}
 .protein{background:linear-gradient(90deg,#7ee787,#3ac569)}
 .carb{background:linear-gradient(90deg,#ffd07a,#ffb347)}
 .fat{background:linear-gradient(90deg,#f8a5c2,#ff7eb6)}
 .small{font-size:13px; color:var(--muted)}
+
+.todo-container{
+  display:flex; flex-direction:column; gap:10px;
+}
+#todoInput{
+  padding:10px; border:1px solid #ddd;
+  border-radius:6px; flex:1;
+}
+#addTodo{
+  background:var(--accent); color:white;
+  border:none; padding:10px; border-radius:8px;
+  cursor:pointer;
+}
+#todoList{
+  list-style:none; padding:0; margin:0;
+}
+#todoList li{
+  padding:8px; border-bottom:1px solid #eee;
+  display:flex; justify-content:space-between;
+  align-items:center;
+}
+#todoList li.done{
+  text-decoration:line-through; color:#888;
+}
 @media (max-width:900px){
   .container{grid-template-columns:1fr;}
 }
