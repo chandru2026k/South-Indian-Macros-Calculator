@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Login / Sign Up — South Indian Macros</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth.js" defer></script>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <div class="brand"><img src="data:image/png;base64,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"><h1>South Indian Macros</h1></div>
+    <div class="controls">
+      <button class="nav-btn" onclick="window.location.href='index.html'" data-i18n="btn_home">Home</button>
+    </div>
+  </div>
+</header>
+
+<main class="page-auth">
+  <div class="auth-container">
+    <div class="panel">
+      <h2 data-i18n="signup_title">Create Account</h2>
+      <form id="signupForm">
+        <input type="text" id="su_name" placeholder="Name" required>
+        <input type="email" id="su_email" placeholder="Email" required>
+        <input type="password" id="su_pass" placeholder="Password" required>
+        <select id="su_gender"><option value="male">Male</option><option value="female">Female</option></select>
+        <input type="number" id="su_age" placeholder="Age">
+        <input type="number" id="su_weight" placeholder="Weight (kg)">
+        <input type="number" id="su_height" placeholder="Height (cm)">
+        <select id="su_goal"><option value="maintain">Maintain</option><option value="lose">Lose</option><option value="gain">Gain</option></select>
+        <select id="su_diet"><option value="veg">Veg</option><option value="nonveg">Non-Veg</option></select>
+        <button class="btn" type="submit">Sign Up</button>
+      </form>
+    </div>
+    <div class="panel">
+      <h2 data-i18n="login_title">Login</h2>
+      <form id="loginForm">
+        <input type="email" id="li_email" placeholder="Email" required>
+        <input type="password" id="li_pass" placeholder="Password" required>
+        <button class="btn" type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">© 2025 South Indian Macros</footer>
+<script src="lang.js"></script>
+
+</body>
+</html>
