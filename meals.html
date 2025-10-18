@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>South Indian Meal Recommendations</title>
+  <link rel="stylesheet" href="meals.css" />
+</head>
+<body>
+  <header>
+    <h1> Smart South Indian Meal Recommendations For 500 calo</h1>
+    <nav>
+      <a href="dashboard.html">🏠 Dashboard</a>
+      <a href="summary.html">📊 Summary</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="filters">
+      <label>
+        Diet Type:
+        <select id="dietSelect">
+          <option value="all">All</option>
+          <option value="veg">Veg</option>
+          <option value="non-veg">Non-Veg</option>
+        </select>
+      </label>
+
+      <label>
+        Target Calories:
+        <input type="number" id="calTarget" placeholder="e.g. 500" />
+      </label>
+
+      <button id="recommendBtn">Get Recommendations</button>
+    </section>
+
+    <section id="mealResults" class="meal-results"></section>
+  </main>
+
+  <footer>
+    <p>© 2025 South Indian Macros | Made with ❤️</p>
+  </footer>
+
+  <script src="meals.js"></script>
+</body>
+</html>

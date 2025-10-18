@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Idli with Sambar",
+    "type": "veg",
+    "meal": "Breakfast",
+    "calories": 280,
+    "protein": 10,
+    "carbs": 50,
+    "fat": 5,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Idli_Sambar.jpg"
+  },
+  {
+    "name": "Dosa with Chutney",
+    "type": "veg",
+    "meal": "Breakfast",
+    "calories": 350,
+    "protein": 8,
+    "carbs": 55,
+    "fat": 7,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Dosa_Sambar_Chutney.jpg"
+  },
+  {
+    "name": "Chicken Curry with Rice",
+    "type": "non-veg",
+    "meal": "Lunch",
+    "calories": 600,
+    "protein": 35,
+    "carbs": 65,
+    "fat": 18,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Chicken_Curry.jpg"
+  },
+  {
+    "name": "Curd Rice",
+    "type": "veg",
+    "meal": "Dinner",
+    "calories": 420,
+    "protein": 12,
+    "carbs": 55,
+    "fat": 10,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/48/Curd_rice.jpg"
+  },
+  {
+    "name": "Fish Fry with Lemon",
+    "type": "non-veg",
+    "meal": "Dinner",
+    "calories": 480,
+    "protein": 30,
+    "carbs": 10,
+    "fat": 25,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/Fish_fry.jpg"
+  }
+]
